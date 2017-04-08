@@ -20,6 +20,13 @@ app.get('/', function (req, res) {
   res.render('index.html', { env: process.env, title: hostname});
 });
 
+app.get('/hostname', function (req, res) {
+  // try to initialize the db on every request if it's not already
+  // initialized.
+  var hostname = process.env.HOSTNAME || 'localhost';
+  res.status(200).send(hostname);
+});
+
 
 // error handling
 app.use(function(err, req, res, next){
