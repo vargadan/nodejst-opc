@@ -23,8 +23,11 @@ app.get('/', function (req, res) {
 app.get('/hostname', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
+
   var hostname = process.env.HOSTNAME || 'localhost';
-  res.status(200).send(hostname);
+  res..writeHead(200, {
+    'Cache-Control': 'no-cache'
+    }).send(hostname);
 });
 
 
