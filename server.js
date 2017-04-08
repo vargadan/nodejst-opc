@@ -25,7 +25,7 @@ app.get('/hostname', function (req, res) {
   // initialized.
 
   var hostname = process.env.HOSTNAME || 'localhost';
-  res..writeHead(200, {
+  res.writeHead(200, {
     'Cache-Control': 'no-cache'
     }).send(hostname);
 });
