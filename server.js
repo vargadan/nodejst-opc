@@ -20,14 +20,16 @@ app.get('/', function (req, res) {
   res.render('index.html', { env: process.env, title: hostname});
 });
 
-app.get('/hostname', function (req, res) {
+app.get('/env/:param', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
-
-  var hostname = process.env.HOSTNAME || 'localhost';
-  res.writeHead(200, {
-    'Cache-Control': 'no-cache'
-    }).send(hostname);
+  var envParam = req.params.param;
+  var value = process.env[envParam];
+  console.log('env.param %s : %s', envParam, value);
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  res.send(value);
 });
 
 
